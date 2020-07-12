@@ -1,0 +1,97 @@
+﻿@model Questionnaire.Models.StudentRegisterClass
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="text-center">
+        <h1 class="display-4">Login to Questionnaire</h1>
+        <div class="container container-margin">
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <div class="login_section">
+                        <div class="input-group mb-3">
+                            <input asp-for="LoginUserName" type="text" size="6" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input asp-for="LoginPassword" type="password" size="6" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <button type="submit" value="Login" name="buttonType" class="btn btn-success btn-block">Login</button>
+                        </div>
+                        <div class="input-group mb-3 justify-content-center">
+                            <button type="button" data-toggle="modal" data-target="#Register" name="Login" class="btn btn-link">Register Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@*Register here*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="modal" tabindex="-1" role="dialog" id="Register">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Register here</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3 form-group">
+                        <input asp-for="Name" type="text" size="6" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="input-group mb-3 form-group">
+                        <input asp-for="UserName" type="text" size="6" class="form-control" placeholder="UserName" aria-label="Username" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="input-group mb-3 form-group">
+                        <input asp-for="Email" type="email" size="6" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="input-group mb-3 form-group">
+                        <input asp-for="MobileNumber" type="number" size="6" onkeypress="return isNumber(event)" class="form-control" placeholder="Mobile Number" aria-label="Mobile No." aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="input-group mb-3 form-group">
+                        <input asp-for="UserPassword" type="password" size="6" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="date">Date Of Birth</label>
+                        <input asp-for="DOB" type="date" class="form-control" id="birthday" asp-format="{0:yyyy-MM-dd}" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="form-check-label">Gender:</label>
+                        </div>
+                        <div class="col-3 form-group">
+                            <input asp-for="Gender" value="Male" type="radio" name="Gender" class="form-check-input" id="MaleCheck" required>
+                            <label class="form-check-label">Male</label>
+                        </div>
+                        <div class="col-3">
+                            <input asp-for="Gender" value="Female" type="radio" name="Gender" class="form-check-input" id="Femalecheck">
+                            <label class="form-check-label">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Clear</button>
+                    <button type="submit" value="Submit" class="btn btn-primary" name="buttonType">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@{
+    if (@TempData["Msg"] != null)
+    {
+        <script>
+            alert('@TempData["msg"]')
+        </script>
+
+    }
+}  
